@@ -1,22 +1,32 @@
 var inserted = {};
+var styleElements = {};
 
 module.exports = function (css, options) {
     if (inserted[css]) return;
     inserted[css] = true;
-    
-    var elem = document.createElement('style');
-    elem.setAttribute('type', 'text/css');
 
-    if ('textContent' in elem) {
-      elem.textContent = css;
-    } else {
-      elem.styleSheet.cssText = css;
+    options = options || {};
+
+    var position = options.prepend ? 'prepend' : 'append';
+
+    var styleElement = styleElements[position];
+
+    if (!styleElement) {
+      styleElement = styleElements[position] = document.createElement('style');
+      styleElement.setAttribute('type', 'text/css')
     }
-    
-    var head = document.getElementsByTagName('head')[0];
-    if (options && options.prepend) {
-        head.insertBefore(elem, head.childNodes[0]);
+
+    if (styleElement.styleSheet) {
+      styleElement.styleSheet.cssText += css
     } else {
-        head.appendChild(elem);
+      styleElement.appendChild(document.createTextNode(css))
+    }
+
+    var head = document.getElementsByTagName('head')[0];
+
+    if (position === 'prepend') {
+        head.insertBefore(styleElement, head.childNodes[0]);
+    } else {
+        head.appendChild(styleElement);
     }
 };
