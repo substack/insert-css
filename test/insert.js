@@ -4,7 +4,7 @@ var insertCss = require('../');
 var css = 'body { background-color: purple; color: yellow; }';
 
 test(function (t) {
-    t.plan(4);
+    t.plan(6);
     if (typeof window.getComputedStyle !== 'function') {
         t.fail('cannot getComputedStyle()');
     }
@@ -18,6 +18,13 @@ test(function (t) {
     var after = colors();
     t.equal(after.bg, 'rgb(128,0,128)');
     t.equal(after.fg, 'rgb(255,255,0)');
+
+    var resetStyle = 'body { background-color: transparent; color: black; }';
+    insertCss(resetStyle);
+
+    var reset = colors();
+    t.ok(reset.bg === 'rgba(0,0,0,0)' || reset.bg === 'transparent');
+    t.ok(reset.fg === 'rgb(0,0,0)');
 });
 
 function colors () {
