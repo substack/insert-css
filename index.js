@@ -8,10 +8,5 @@ module.exports = function (css) {
     var text = document.createTextNode(css);
     elem.appendChild(text);
     
-    if (document.head.childNodes.length) {
-        document.head.insertBefore(elem, document.head.childNodes[0]);
-    }
-    else {
-        document.head.appendChild(elem);
-    }
+    document.head.appendChild(elem);
 };
