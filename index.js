@@ -1,12 +1,18 @@
-var inserted = [];
+var inserted = {};
 
 module.exports = function (css) {
-    if (inserted.indexOf(css) >= 0) return;
-    inserted.push(css);
+    if (inserted[css]) return;
+    inserted[css] = true;
     
     var elem = document.createElement('style');
-    var text = document.createTextNode(css);
-    elem.appendChild(text);
+    elem.setAttribute('type', 'text/css');
+
+    if ('textContent' in elem) {
+      elem.textContent = css;
+    } else {
+      elem.styleSheet.cssText = css;
+    }
     
-    document.head.appendChild(elem);
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(elem);
 };
