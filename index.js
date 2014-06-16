@@ -1,6 +1,6 @@
 var inserted = {};
 
-module.exports = function (css) {
+module.exports = function (css, options) {
     if (inserted[css]) return;
     inserted[css] = true;
     
@@ -14,5 +14,9 @@ module.exports = function (css) {
     }
     
     var head = document.getElementsByTagName('head')[0];
-    head.appendChild(elem);
+    if (options && options.prepend) {
+        head.insertBefore(elem, head.childNodes[0]);
+    } else {
+        head.appendChild(elem);
+    }
 };
