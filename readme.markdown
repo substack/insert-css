@@ -26,6 +26,12 @@ insertCss(css);
 document.body.appendChild(document.createTextNode('HELLO CRUEL WORLD'));
 ```
 
+optionally prepend the css to the head with the `prepend` option:
+
+``` js
+insertCss(css, { prepend: true });
+```
+
 compile with [browserify](http://browserify.org) using
 [brfs](https://github.com/substack/brfs) to inline the `fs.readFile()`
 call:
