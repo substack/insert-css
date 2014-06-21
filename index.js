@@ -5,7 +5,6 @@ module.exports = function (css, options) {
     inserted[css] = true;
     
     var elem = document.createElement('style');
-    elem.setAttribute('type', 'text/css');
 
     if ('textContent' in elem) {
       elem.textContent = css;
