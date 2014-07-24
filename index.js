@@ -4,7 +4,7 @@ module.exports = function (css, options) {
     if (inserted[css]) return;
     inserted[css] = true;
 
-    var doc = options.document ||  document;    
+    var doc = (typeof options !== 'undefined' && options.document) || document;
     var elem = doc.createElement('style');
     elem.setAttribute('type', 'text/css');
 
