@@ -3,8 +3,9 @@ var inserted = {};
 module.exports = function (css, options) {
     if (inserted[css]) return;
     inserted[css] = true;
-    
-    var elem = document.createElement('style');
+
+    var doc = (typeof options !== 'undefined' && options.document) || document;
+    var elem = doc.createElement('style');
     elem.setAttribute('type', 'text/css');
 
     if ('textContent' in elem) {
@@ -13,7 +14,7 @@ module.exports = function (css, options) {
       elem.styleSheet.cssText = css;
     }
     
-    var head = document.getElementsByTagName('head')[0];
+    var head = doc.getElementsByTagName('head')[0];
     if (options && options.prepend) {
         head.insertBefore(elem, head.childNodes[0]);
     } else {
