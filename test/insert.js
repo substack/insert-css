@@ -5,8 +5,8 @@ var getStyle = require('computed-style');
 var css = 'body { background-color: purple; color: yellow; }';
 
 test(function (t) {
-    t.plan(10);
-    
+    t.plan(12);
+
     var before = colors();
     t.ok(before.bg === 'rgba(0,0,0,0)' || before.bg === 'transparent');
     t.ok(before.fg === 'rgb(0,0,0)' || before.fg === '#000000');
@@ -37,6 +37,12 @@ test(function (t) {
     var reset = colors();
     t.ok(reset.bg === 'rgb(255,255,0)' || reset.bg === 'yellow');
     t.ok(reset.fg === 'rgb(128,0,128)' || reset.fg === 'purple');
+
+    var resetStyle = 'body { background-color: blue; color: orange; }';
+    var elem = insertCss(resetStyle, { prepend: true });
+
+    t.ok(elem.nodeName === 'STYLE');
+    t.ok(elem === document.getElementsByTagName('style')[0]);
 });
 
 function colors () {
