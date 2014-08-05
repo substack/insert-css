@@ -51,3 +51,11 @@ blob with inline css!
   </body>
 </html>
 ```
+
+`insertCss` will return the inserted `<style>` element. Use this if you need to
+clean up.
+
+``` js
+var elem = insertCss(css)
+elem.parentNode.removeChild(elem)
+```
