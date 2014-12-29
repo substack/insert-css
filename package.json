@@ -2,8 +2,11 @@
     "name": "insert-css",
     "version": "0.2.0",
     "description": "insert a string of css into the <head>",
-    "main": "index.js",
-    "dependencies": {},
+    "main": "node.js",
+    "browser": "./index.js",
+    "dependencies": {
+        "sandboxed-module": "^2.0.0"
+    },
     "devDependencies": {
         "tape": "^2.13.3",
         "computed-style": "~0.1.3"
