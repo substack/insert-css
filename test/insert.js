@@ -5,7 +5,7 @@ var getStyle = require('computed-style');
 var css = 'body { background-color: purple; color: yellow; }';
 
 test(function (t) {
-    t.plan(10);
+    t.plan(11);
     
     var before = colors();
     t.ok(before.bg === 'rgba(0,0,0,0)' || before.bg === 'transparent');
@@ -37,6 +37,10 @@ test(function (t) {
     var reset = colors();
     t.ok(reset.bg === 'rgb(255,255,0)' || reset.bg === 'yellow');
     t.ok(reset.fg === 'rgb(128,0,128)' || reset.fg === 'purple');
+
+    var parent = document.createElement('div');
+    insertCss('', { parent: parent });
+    t.ok(parent.firstChild.tagName, 'STYLE');
 });
 
 function colors () {

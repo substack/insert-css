@@ -13,10 +13,11 @@ module.exports = function (css, options) {
       elem.styleSheet.cssText = css;
     }
     
-    var head = document.getElementsByTagName('head')[0];
+    var parent = (options && options.parent) ||
+        document.getElementsByTagName('head')[0];
     if (options && options.prepend) {
-        head.insertBefore(elem, head.childNodes[0]);
+        parent.insertBefore(elem, parent.childNodes[0]);
     } else {
-        head.appendChild(elem);
+        parent.appendChild(elem);
     }
 };
