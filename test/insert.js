@@ -40,7 +40,7 @@ test(function (t) {
 
     var parent = document.createElement('div');
     insertCss('', { parent: parent });
-    t.ok(parent.firstChild.tagName, 'STYLE');
+    t.ok(parent.lastChild.tagName, 'STYLE');
 });
 
 function colors () {
