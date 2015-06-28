@@ -32,6 +32,13 @@ optionally prepend the css to the head with the `prepend` option:
 insertCss(css, { prepend: true });
 ```
 
+inject the `<style>` tag into any element:
+
+``` js
+var container = document.getElementById('placeholder');
+insertCss(css, { parent: container });
+```
+
 compile with [browserify](http://browserify.org) using
 [brfs](https://github.com/substack/brfs) to inline the `fs.readFile()`
 call:
