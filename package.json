@@ -37,7 +37,14 @@
         "insert",
         "dom",
         "browser",
-        "browserify"
+        "browserify",
+        "inject",
+        "styles",
+        "stylesheet",
+        "style",
+        "html",
+        "head",
+        "link"
     ],
     "author": {
         "name": "James Halliday",
