@@ -51,3 +51,12 @@ blob with inline css!
   </body>
 </html>
 ```
+
+Should you want to get rid of the styles we’ve inserted, it’s easy as pie:
+
+``` js
+const myStyles = insertCss('whatever {}');
+// Styles are in
+myStyles.parentNode.removeChild(myStyles);
+// Styles are out
+```
