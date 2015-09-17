@@ -51,3 +51,11 @@ blob with inline css!
   </body>
 </html>
 ```
+
+If you’re running this module outside a browser, you can pass a custom instance of `document`:
+
+``` js
+var doc = require('jsdom').jsdom('<!DOCTYPE html>').defaultView.document;
+
+insertCss(css, { document: doc });
+```

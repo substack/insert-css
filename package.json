@@ -6,11 +6,15 @@
     "dependencies": {},
     "devDependencies": {
         "tape": "^2.13.3",
+        "jsdom": "^6.5.0",
         "computed-style": "~0.1.3"
     },
     "repository": {
         "type": "git",
         "url": "git://github.com/substack/insert-css.git"
+    },
+    "browser" : {
+        "jsdom": false
     },
     "testling" : {
         "files" : "test/*.js",
