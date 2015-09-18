@@ -39,6 +39,17 @@ test(function (t) {
     t.ok(reset.fg === 'rgb(128,0,128)' || reset.fg === 'purple');
 });
 
+test('Allow inserting the same CSS twice', function (t) {
+    t.plan(2);
+
+    var resetStyle = 'body { background-color: transparent; color: #000000; }';
+    insertCss(resetStyle);
+
+    var reset = colors();
+    t.ok(reset.bg === 'rgba(0,0,0,0)' || reset.bg === 'transparent');
+    t.ok(reset.fg === 'rgb(0,0,0)' || reset.fg === '#000000');
+});
+
 function colors () {
     var body = document.getElementsByTagName('body')[0];
     return {
