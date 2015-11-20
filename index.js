@@ -13,7 +13,7 @@ module.exports = function (css, options) {
       elem.styleSheet.cssText = css;
     }
     
-    var head = document.getElementsByTagName('head')[0];
+    var head = document.head || document.getElementsByTagName('head')[0];
     if (options && options.prepend) {
         head.insertBefore(elem, head.childNodes[0]);
     } else {
