@@ -5,6 +5,13 @@ module.exports = function (css, options) {
     options = options || {};
 
     var position = options.prepend ? 'prepend' : 'append';
+    var container;
+
+    if (options.container !== undefined) {
+        container = options.container;
+    } else {
+        container = document.getElementsByTagName('head')[0];
+    }
 
     var styleElement = styleElements[position];
 
@@ -19,12 +26,10 @@ module.exports = function (css, options) {
       styleElement.appendChild(document.createTextNode(css))
     }
 
-    var head = document.getElementsByTagName('head')[0];
-
     if (position === 'prepend') {
-        head.insertBefore(styleElement, head.childNodes[0]);
+        container.insertBefore(styleElement, container.childNodes[0]);
     } else {
-        head.appendChild(styleElement);
+        container.appendChild(styleElement);
     }
 
     return styleElement;

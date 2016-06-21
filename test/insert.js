@@ -33,7 +33,7 @@ test(function (t) {
     }
     t.equal(tag, appendStyleTag, 'prepend mode should add a style tag before the append one');
 
-    // should use old school styleSheet prop when present (IE)
+    // uses old school styleSheet prop when present (IE)
     if (!appendStyleTag.styleSheet) {
         appendStyleTag.styleSheet = {cssText: 'a'};
         insertCss('p{color:blue}');
@@ -41,9 +41,17 @@ test(function (t) {
         delete appendStyleTag.styleSheet;
     }
 
-    // should allow re-adding added style
+    // allow re-adding added style
     insertCss(baseStyle);
     t.equal(position(), 'relative', 'position is again `relative`');
+
+    // allow using a custom container
+    var customContainer = document.createElement('div');
+    document.querySelector('body').appendChild(customContainer);
+    t.equal(nbStyleTags(customContainer), 0, 'no style tag in custom container');
+    insertCss('body{position:absolute}', {container: customContainer});
+    t.equal(nbStyleTags(customContainer), 1, 'new style tag added in custom container');
+    t.equal(position(), 'absolute', 'position is absolute again');
 
     t.end();
 });
@@ -58,6 +66,7 @@ function textDecoration() {
     return getStyle(document.querySelector('body'), 'text-decoration');
 }
 
-function nbStyleTags() {
-    return document.querySelectorAll('style').length
+function nbStyleTags(container) {
+    if (!container) container = document;
+    return container.querySelectorAll('style').length
 }
