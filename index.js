@@ -29,4 +29,6 @@ module.exports = function (css, options) {
     } else {
         head.appendChild(styleElement);
     }
+
+    return styleElement;
 };
