@@ -10,7 +10,7 @@ module.exports = function (css, options) {
     if (options.container !== undefined) {
         container = options.container;
     } else {
-        container = document.getElementsByTagName('head')[0];
+        container = document.querySelector('head');
     }
 
     var styleElement = styleElements[position];
