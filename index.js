@@ -2,9 +2,6 @@ var inserted = {};
 var styleElements = {};
 
 module.exports = function (css, options) {
-    if (inserted[css]) return;
-    inserted[css] = true;
-
     options = options || {};
 
     var position = options.prepend ? 'prepend' : 'append';

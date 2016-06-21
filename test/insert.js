@@ -40,6 +40,11 @@ test(function (t) {
         t.equal(appendStyleTag.styleSheet.cssText, 'ap{color:blue}', 'we use old school styleSheet prop');
         delete appendStyleTag.styleSheet;
     }
+
+    // should allow re-adding added style
+    insertCss(baseStyle);
+    t.equal(position(), 'relative', 'position is again `relative`');
+
     t.end();
 });
 
