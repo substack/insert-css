@@ -5,7 +5,7 @@
     "main": "index.js",
     "dependencies": {},
     "scripts": {
-        "test": "node test/insert.js",
+        "test": "node test.js",
         "example": "budo example.js"
     },
     "devDependencies": {
@@ -21,7 +21,7 @@
         "url": "git://github.com/substack/insert-css.git"
     },
     "testling" : {
-        "files" : "test/insert.js",
+        "files" : "test.js",
         "browsers" : [
             "ie/6..latest",
             "chrome/20..latest",
