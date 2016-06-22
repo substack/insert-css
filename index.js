@@ -1,36 +1,47 @@
-var inserted = {};
-var styleElements = {};
+var containers = []; // will store container HTMLElement references
+var styleElements = []; // will store {prepend: HTMLElement, append: HTMLElement}
 
 module.exports = function (css, options) {
     options = options || {};
 
     var position = options.prepend ? 'prepend' : 'append';
-    var container;
+    var container = options.container ? options.container : document.querySelector('head');
+    var containerId = containers.indexOf(container);
 
-    if (options.container !== undefined) {
-        container = options.container;
+    // first time we see this container, create the necessary entries
+    if (containerId === -1) {
+        console.log('ok')
+        containerId = containers.push(container) - 1;
+        styleElements[containerId] = {};
+    }
+
+    // try to get the correponding container + position styleElement, create it otherwise
+    var styleElement;
+
+    if (styleElements[containerId] !== undefined && styleElements[containerId][position] !== undefined) {
+        styleElement = styleElements[containerId][position];
     } else {
-        container = document.querySelector('head');
+        styleElement = styleElements[containerId][position] = createStyleElement();
+
+        if (position === 'prepend') {
+            container.insertBefore(styleElement, container.childNodes[0]);
+        } else {
+            container.appendChild(styleElement);
+        }
     }
 
-    var styleElement = styleElements[position];
-
-    if (!styleElement) {
-      styleElement = styleElements[position] = document.createElement('style');
-      styleElement.setAttribute('type', 'text/css')
-    }
-
+    // actually add the stylesheet
     if (styleElement.styleSheet) {
-      styleElement.styleSheet.cssText += css
+        styleElement.styleSheet.cssText += css
     } else {
-      styleElement.appendChild(document.createTextNode(css))
-    }
-
-    if (position === 'prepend') {
-        container.insertBefore(styleElement, container.childNodes[0]);
-    } else {
-        container.appendChild(styleElement);
+        styleElement.textContent += css;
     }
 
     return styleElement;
 };
+
+function createStyleElement() {
+    var styleElement = document.createElement('style');
+    styleElement.setAttribute('type', 'text/css');
+    return styleElement;
+}
