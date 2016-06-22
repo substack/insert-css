@@ -4,13 +4,12 @@ var styleElements = []; // will store {prepend: HTMLElement, append: HTMLElement
 module.exports = function (css, options) {
     options = options || {};
 
-    var position = options.prepend ? 'prepend' : 'append';
-    var container = options.container ? options.container : document.querySelector('head');
+    var position = options.prepend === true ? 'prepend' : 'append';
+    var container = options.container !== undefined ? options.container : document.querySelector('head');
     var containerId = containers.indexOf(container);
 
     // first time we see this container, create the necessary entries
     if (containerId === -1) {
-        console.log('ok')
         containerId = containers.push(container) - 1;
         styleElements[containerId] = {};
     }
