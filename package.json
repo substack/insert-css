@@ -5,7 +5,7 @@
     "main": "index.js",
     "dependencies": {},
     "scripts": {
-        "test": "browserify test.js | tape-run --browser",
+        "test": "browserify test.js | tape-run",
         "example": "budo example.js"
     },
     "devDependencies": {
