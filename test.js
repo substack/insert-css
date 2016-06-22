@@ -3,7 +3,7 @@ require('jsdom-global')();
 var test = require('tape');
 
 test(function (t) {
-    var insertCss = require('../');
+    var insertCss = require('./');
     var initialNbStyleTags = nbStyleTags();
 
     // basic usage
