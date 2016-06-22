@@ -1,5 +1,3 @@
-require('jsdom-global')();
-
 var test = require('tape');
 
 test(function (t) {

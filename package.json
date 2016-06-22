@@ -5,16 +5,16 @@
     "main": "index.js",
     "dependencies": {},
     "scripts": {
-        "test": "node test.js",
+        "test": "browserify test.js | tape-run --browser",
         "example": "budo example.js"
     },
     "devDependencies": {
+        "browserify": "^13.0.1",
         "budo": "^8.3.0",
         "computed-style": "^0.3.0",
         "dom-event": "^1.0.0",
-        "jsdom": "^9.2.1",
-        "jsdom-global": "^2.0.0",
-        "tape": "^4.6.0"
+        "tape": "^4.6.0",
+        "tape-run": "^2.1.4"
     },
     "repository": {
         "type": "git",
