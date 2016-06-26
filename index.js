@@ -1,22 +1,46 @@
-var inserted = {};
+var containers = []; // will store container HTMLElement references
+var styleElements = []; // will store {prepend: HTMLElement, append: HTMLElement}
 
 module.exports = function (css, options) {
-    if (inserted[css]) return;
-    inserted[css] = true;
-    
-    var elem = document.createElement('style');
-    elem.setAttribute('type', 'text/css');
+    options = options || {};
 
-    if ('textContent' in elem) {
-      elem.textContent = css;
-    } else {
-      elem.styleSheet.cssText = css;
+    var position = options.prepend === true ? 'prepend' : 'append';
+    var container = options.container !== undefined ? options.container : document.querySelector('head');
+    var containerId = containers.indexOf(container);
+
+    // first time we see this container, create the necessary entries
+    if (containerId === -1) {
+        containerId = containers.push(container) - 1;
+        styleElements[containerId] = {};
     }
-    
-    var head = document.getElementsByTagName('head')[0];
-    if (options && options.prepend) {
-        head.insertBefore(elem, head.childNodes[0]);
+
+    // try to get the correponding container + position styleElement, create it otherwise
+    var styleElement;
+
+    if (styleElements[containerId] !== undefined && styleElements[containerId][position] !== undefined) {
+        styleElement = styleElements[containerId][position];
     } else {
-        head.appendChild(elem);
+        styleElement = styleElements[containerId][position] = createStyleElement();
+
+        if (position === 'prepend') {
+            container.insertBefore(styleElement, container.childNodes[0]);
+        } else {
+            container.appendChild(styleElement);
+        }
     }
+
+    // actually add the stylesheet
+    if (styleElement.styleSheet) {
+        styleElement.styleSheet.cssText += css
+    } else {
+        styleElement.textContent += css;
+    }
+
+    return styleElement;
 };
+
+function createStyleElement() {
+    var styleElement = document.createElement('style');
+    styleElement.setAttribute('type', 'text/css');
+    return styleElement;
+}
