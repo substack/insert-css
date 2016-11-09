@@ -1,7 +1,7 @@
 var containers = []; // will store container HTMLElement references
 var styleElements = []; // will store {prepend: HTMLElement, append: HTMLElement}
 
-module.exports = function (css, options) {
+function insertCss(css, options) {
     options = options || {};
 
     var position = options.prepend === true ? 'prepend' : 'append';
@@ -47,3 +47,6 @@ function createStyleElement() {
     styleElement.setAttribute('type', 'text/css');
     return styleElement;
 }
+
+module.exports = insertCss;
+module.exports.insertCss = insertCss;
