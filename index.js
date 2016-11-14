@@ -1,11 +1,13 @@
 var containers = []; // will store container HTMLElement references
 var styleElements = []; // will store {prepend: HTMLElement, append: HTMLElement}
 
+var usage = 'insert-css: You need to provide a CSS string. Usage: insertCss(cssString[, options]).';
+
 function insertCss(css, options) {
     options = options || {};
 
-    if (!css) {
-        return false;
+    if (css === undefined) {
+        throw new Error(usage);
     }
 
     var position = options.prepend === true ? 'prepend' : 'append';
