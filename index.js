@@ -4,6 +4,10 @@ var styleElements = []; // will store {prepend: HTMLElement, append: HTMLElement
 function insertCss(css, options) {
     options = options || {};
 
+    if (!css) {
+        return false;
+    }
+
     var position = options.prepend === true ? 'prepend' : 'append';
     var container = options.container !== undefined ? options.container : document.querySelector('head');
     var containerId = containers.indexOf(container);
