@@ -6,7 +6,10 @@
     "dependencies": {},
     "scripts": {
         "test": "browserify test.js | tape-run",
-        "example": "budo example.js"
+        "example": "budo example.js",
+        "posttest:ci": "npm run lint",
+        "lint": "eslint .",
+        "posttest": "npm run lint"
     },
     "devDependencies": {
         "browserify": "^13.0.1",
@@ -14,7 +17,8 @@
         "computed-style": "^0.3.0",
         "dom-event": "^1.0.0",
         "tape": "^4.6.0",
-        "tape-run": "^2.1.4"
+        "tape-run": "^2.1.4",
+        "eslint": "3.10.2"
     },
     "repository": {
         "type": "git",
