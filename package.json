@@ -9,12 +9,12 @@
         "example": "budo example.js"
     },
     "devDependencies": {
-        "browserify": "^13.0.1",
-        "budo": "^8.3.0",
-        "computed-style": "^0.3.0",
-        "dom-event": "^1.0.0",
-        "tape": "^4.6.0",
-        "tape-run": "^2.1.4"
+        "browserify": "13.0.1",
+        "budo": "8.3.0",
+        "computed-style": "0.3.0",
+        "dom-event": "1.0.0",
+        "tape": "4.6.0",
+        "tape-run": "2.1.4"
     },
     "repository": {
         "type": "git",

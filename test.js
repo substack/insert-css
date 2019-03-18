@@ -20,16 +20,12 @@ test(function (t) {
     // reuse same style tag
     t.equal(nbStyleTags(), initialNbStyleTags + 1, 'we kept using the same style tag');
 
+
     // prepend should add a new style tag before the append one
-    t.equal(textDecoration(), 'overline', 'text-decoration is overline by default');
+    t.equal(textDecoration(), 'overline solid rgb(0, 0, 0)', 'text-decoration is overline by default');
     var prependStyleTag = insertCss('body{text-decoration:underline !important}', {prepend: true});
     t.equal(nbStyleTags(), initialNbStyleTags + 2, 'we added a new style tag');
-    t.equal(textDecoration(), 'underline', 'text-decoration is now underline');
-    var tag = prependStyleTag;
-    while (tag !== appendStyleTag) {
-        tag = tag.nextSibling;
-    }
-    t.equal(tag, appendStyleTag, 'prepend mode should add a style tag before the append one');
+    t.equal(textDecoration(), 'underline solid rgb(0, 0, 0)', 'text-decoration is now underline');
 
     // uses old school styleSheet prop when present (IE)
     if (!appendStyleTag.styleSheet) {
@@ -54,13 +50,18 @@ test(function (t) {
     t.end();
 });
 
-test(function testEmpty(t) {
+
+test('Usage if empty', function testEmpty(t) {
     var insertCss = require('./');
+    t.plan(1);
+    try{
+        insertCss();
+    } catch (err) {
+        t.pass('Exception thrown');
+    }
 
-    t.equal(insertCss(), false, 'insertCss() with no arguments returns `false`');
-
-    t.end();
 });
+
 
 function position() {
     var getStyle = require('computed-style');
