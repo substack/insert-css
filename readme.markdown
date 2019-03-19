@@ -1,3 +1,5 @@
+[![NPM version](http://img.shields.io/npm/v/insert-css.svg)](https://www.npmjs.org/package/insert-css)
+
 # insert-css
 
 insert a string of css into the `<head>`
